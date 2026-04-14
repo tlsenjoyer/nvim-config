@@ -38,7 +38,8 @@ return {
       "svelte",
       "clangd",
       "graphql",
-      "emmet_ls"
+      "emmet_ls",
+      "ansiblels"
     }
 
     for _, server in ipairs(servers_with_default_options) do

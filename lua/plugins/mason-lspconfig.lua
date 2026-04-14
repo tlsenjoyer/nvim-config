@@ -18,6 +18,7 @@ return {
       "tailwindcss",
       "pyright",
       "rust_analyzer",
+      "ansiblels",
     },
   },
   event = "BufReadPre",
