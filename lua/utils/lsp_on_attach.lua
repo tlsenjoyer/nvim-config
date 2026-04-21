@@ -28,7 +28,7 @@ return function(client, bufnr)
     keymap.set("n", "<leader>dt", ":lua require('dap-python').test_method()", opts) -- run tests
   end
 
-  if client.name == "tsserver" then
+  if client.name == "ts_ls" or client.name == "tsserver" then
     keymap.set("n", "<leader>oi", tsserver_organize_imports, opts) -- organize imports
   end
 end

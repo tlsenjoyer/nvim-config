@@ -2,11 +2,22 @@ local home = os.getenv("HOME")
 local workspace_path = home .. "/.local/share/nvim/jdtls-workspace/"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = workspace_path .. project_name
+local mason_jdtls_path = home .. "/.local/share/nvim/mason/packages/jdtls"
+local config_dir = "config_linux"
+
+if vim.fn.has("macunix") == 1 then
+  config_dir = "config_mac"
+elseif vim.fn.has("win32") == 1 then
+  config_dir = "config_win"
+end
 
 local status, jdtls = pcall(require, "jdtls")
 if not status then
   return
 end
+
+local on_attach = require("utils.lsp_on_attach")
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 
 local config = {
@@ -23,17 +34,17 @@ local config = {
     "java.base/java.util=ALL-UNNAMED",
     "--add-opens",
     "java.base/java.lang=ALL-UNNAMED",
-    "-javaagent:" .. home .. "/.local/share/nvim/mason/packages/jdtls/lombok.jar",
+    "-javaagent:" .. mason_jdtls_path .. "/lombok.jar",
     "-jar",
-    vim.fn.glob(home .. "/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"),
+    vim.fn.glob(mason_jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
     "-configuration",
-    home .. "/.local/share/nvim/mason/packages/jdtls/config_mac",
+    mason_jdtls_path .. "/" .. config_dir,
     "-data",
     workspace_dir,
   },
   root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }),
-  on_attach = require('blink.cmp').get_lsp_capabilities(),
-  capabilities = require("utils.lsp_capabilities"),
+  on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     java = {
       signatureHelp = { enabled = true },

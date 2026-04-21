@@ -14,6 +14,9 @@ return {
 
     conform.setup({
       formatters_by_ft = {
+        bash = { "shfmt" },
+        c = { "clang-format" },
+        go = { "goimports", "gofumpt" },
         javascript = { "prettierd" },
         typescript = { "prettierd" },
         javascriptreact = { "prettierd" },
@@ -28,7 +31,11 @@ return {
         lua = { "stylua" },
         python = { "isort", "black" },
         java = { "google-java-format" },
+        rust = { "rustfmt" },
+        sh = { "shfmt" },
+        toml = { "taplo" },
         cpp = { "clang-format" },
+        zsh = { "shfmt" },
         ["*"] = { "codespell" }, -- run on all filetypes
       },
       format_on_save = {
