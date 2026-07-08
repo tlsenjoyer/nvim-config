@@ -43,6 +43,7 @@ M.tools = {
   "rustfmt",
   "shfmt",
   "stylua",
+  "tree-sitter-cli", -- required by nvim-treesitter (main branch) to build parsers
 }
 
 function M.all()
