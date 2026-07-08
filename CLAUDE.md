@@ -69,6 +69,15 @@ Notes:
   fenced-code-block crash was caused by the archived `master` branch shipping query
   directives written for the pre-0.11 treesitter API; the `main` branch migration
   fixed it. No markdown-specific guard is needed.
+- Telescope is pinned to `branch = "0.1.x"`, whose `current_buffer_fuzzy_find`
+  (`<leader>fz`) highlights results via the legacy nvim-treesitter API. On the
+  `main` branch, `nvim-treesitter.parsers` is a plain data table (no `ft_to_lang`)
+  and `nvim-treesitter.configs` is gone, so the picker crashed with "attempt to
+  call field 'ft_to_lang' (a nil value)". `lua/plugins/telescope.lua` now installs
+  compatibility shims in its `config`: `parsers.ft_to_lang` -> `vim.treesitter.language.get_lang`
+  and a minimal `configs.is_enabled` backed by `vim.treesitter.highlighter.active`.
+  Both are guarded so they no-op if a future telescope/treesitter version restores
+  the API. Watch this if either plugin is updated.
 - `conform.nvim` is configured with `lsp_fallback`; verify the current Conform
   option names before major plugin updates.
 - `lua/config/init.lua` uses `vim.loop.fs_stat`, and `lua/config/autocmds.lua`
