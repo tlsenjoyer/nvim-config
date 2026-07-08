@@ -10,6 +10,9 @@ return {
         layout_config = {
           prompt_position = "top",
         },
+        preview = {
+          treesitter = false,
+        },
         file_ignore_patterns = {
           ".git", ".next", "node_modules", "target"
         },
