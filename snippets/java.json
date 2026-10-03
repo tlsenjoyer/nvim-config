@@ -1,4 +1,64 @@
 {
+  "print line": {
+    "prefix": ["sout", "sysout"],
+    "body": "System.out.println(${1});$0",
+    "description": "Print a line to standard output"
+  },
+  "print formatted": {
+    "prefix": "souf",
+    "body": "System.out.printf(\"${1:%s}\\n\", ${2:value});$0",
+    "description": "Print formatted output"
+  },
+  "print error": {
+    "prefix": "serr",
+    "body": "System.err.println(${1});$0",
+    "description": "Print a line to standard error"
+  },
+  "main method": {
+    "prefix": ["psvm", "main"],
+    "body": ["public static void main(String[] args) {", "\t$0", "}"],
+    "description": "Java main entry point"
+  },
+  "public class": {
+    "prefix": "class",
+    "body": ["public class ${1:${TM_FILENAME_BASE}} {", "\t$0", "}"],
+    "description": "Public class named after the file"
+  },
+  "interface": {
+    "prefix": "interface",
+    "body": ["public interface ${1:${TM_FILENAME_BASE}} {", "\t$0", "}"],
+    "description": "Public interface"
+  },
+  "for loop": {
+    "prefix": "fori",
+    "body": ["for (int ${1:i} = 0; $1 < ${2:count}; $1++) {", "\t$0", "}"],
+    "description": "Indexed for loop"
+  },
+  "for each": {
+    "prefix": ["foreach", "iter"],
+    "body": ["for (${1:var} ${2:item} : ${3:items}) {", "\t$0", "}"],
+    "description": "Enhanced for loop"
+  },
+  "if statement": {
+    "prefix": "if",
+    "body": ["if (${1:condition}) {", "\t$0", "}"],
+    "description": "If statement"
+  },
+  "try catch": {
+    "prefix": "trycatch",
+    "body": ["try {", "\t${1}", "} catch (${2:Exception} ${3:e}) {", "\t$0", "}"],
+    "description": "Try and catch an exception"
+  },
+  "try with resources": {
+    "prefix": "tryr",
+    "body": ["try (${1:var resource = openResource()}) {", "\t$0", "}"],
+    "description": "Try with an automatically closed resource"
+  },
+  "constant": {
+    "prefix": "psf",
+    "body": "public static final ${1:String} ${2:NAME} = ${3:value};$0",
+    "description": "Public static final constant"
+  },
   "public method": {
     "prefix": "pum",
     "body": [
