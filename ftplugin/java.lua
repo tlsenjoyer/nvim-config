@@ -83,7 +83,7 @@ jdtls.start_or_attach({
       referencesCodeLens = { enabled = true },
       references = { includeDecompiledSources = true },
       inlayHints = { parameterNames = { enabled = "all" } },
-      format = { enabled = false }, -- Conform uses google-java-format.
+      format = { enabled = true }, -- Conform prefers google-java-format and falls back to JDT LS.
     },
   },
   init_options = {

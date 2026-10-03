@@ -38,11 +38,13 @@ return {
         zsh = { "shfmt" },
         ["*"] = { "codespell" }, -- run on all filetypes
       },
-      format_on_save = {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 500,
-      },
+      format_on_save = function(bufnr)
+        return {
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = vim.bo[bufnr].filetype == "java" and 5000 or 500,
+        }
+      end,
     })
   end,
 }
