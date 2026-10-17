@@ -1,8 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   branch = "main",
-  event = { "VeryLazy" },
-  lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+  lazy = false, -- main requires startup loading, including its query directives
   build = ":TSUpdate",
   config = function()
     local ts = require("nvim-treesitter")
