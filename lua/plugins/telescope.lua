@@ -36,6 +36,16 @@ return {
   config = function(_, opts)
     require("telescope").setup(opts)
 
+    -- Telescope 0.1.x's preview adapter still uses the legacy plugin API.
+    -- Use core highlighting so previews also work with nvim-treesitter main.
+    require("telescope.previewers.utils").ts_highlighter = function(bufnr, ft)
+      local lang = vim.treesitter.language.get_lang(ft)
+      if not lang then
+        return false
+      end
+      return pcall(vim.treesitter.start, bufnr, lang)
+    end
+
     -- Telescope 0.1.x's `current_buffer_fuzzy_find` (<leader>fz) highlights the
     -- picker results through the legacy nvim-treesitter API: `parsers.ft_to_lang`
     -- and `configs.is_enabled`. This config runs nvim-treesitter on the `main`
