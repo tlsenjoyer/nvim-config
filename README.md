@@ -1,5 +1,13 @@
 # Neovim LSP and Formatter Setup
 
+## Open Files in the Default Application
+
+Open the file tree with `<leader>N`, move the cursor to a file, and press `s`.
+HTML files open in your default browser; other files use their associated
+application. On WSL, the path is converted for Windows before opening it.
+Directories open in the system file manager. Press `g?` in the tree to see its
+keybindings.
+
 ## Java
 
 Open a `.java` file and let JDT LS finish importing/indexing the project. Mason

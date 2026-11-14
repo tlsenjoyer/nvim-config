@@ -11,7 +11,7 @@ return {
           prompt_position = "top",
         },
         file_ignore_patterns = {
-          ".git", ".next", "node_modules", "target"
+          ".git", ".next", "node_modules", "target", "%.class$", "^bin/", "/bin/"
         },
         prompt_prefix = "",
         mappings = {
@@ -27,7 +27,9 @@ return {
             "rg",          -- ripgrep
             "--no-ignore", -- disable exclusion of files/directories based on .gitignore
             "--files",     -- dunno
-            "--hidden"     -- search hidden files/directories (ones that begin with a dot)
+            "--hidden",    -- search hidden files/directories (ones that begin with a dot)
+            "--glob=!*.class",
+            "--glob=!**/bin/**",
           },
         },
       },
